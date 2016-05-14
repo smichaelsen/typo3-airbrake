@@ -1,1 +1,7 @@
 config.contentObjectExceptionHandler = Smichaelsen\Airbrake\ProductionExceptionHandler
+
+plugin.tx_airbrake {
+    apiKey = {$plugin.tx_airbrake.apiKey}
+    host = {$plugin.tx_airbrake.host}
+    resource = {$plugin.tx_airbrake.resource}
+}
