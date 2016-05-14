@@ -7,6 +7,6 @@
         }
     },
     "require": {
-        "dbtlr/php-airbrake": "dev-master"
+        "dbtlr/php-airbrake": "*"
     }
 }
