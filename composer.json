@@ -1,0 +1,9 @@
+{
+    "name": "smichaelsen/airbrake",
+    "type": "typo3-cms-extension",
+    "autoload": {
+        "psr-4": {
+            "Smichaelsen\\Airbrake\\": "Classes/"
+        }
+    }
+}
