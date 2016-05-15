@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" product-name="fluidcontent" date="2014-04-17T12:20:00+01:00">
+		<header/>
+		<body>
+			<trans-unit id="defaultErrorMessage">
+				<source>Sorry, an error occurred. We were automatically informed about this.</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
