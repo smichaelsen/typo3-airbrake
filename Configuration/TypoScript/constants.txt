@@ -5,4 +5,6 @@ plugin.tx_airbrake {
     host = api.airbrake.io
     # cat=plugin.tx_airbrake/file; type=string; label=Airbrake Resource
     resource = /notifier_api/v2/notices
+    # cat=plugin.tx_airbrake/file; type=boolean; label=Keep logfile: Still also log exceptions to typo3temp/logs/ ?
+    stillLogExceptionToLogfile = 0
 }
