@@ -1,4 +1,4 @@
-config.contentObjectExceptionHandler = Smichaelsen\Airbrake\ContentObjectExceptionHandler
+config.contentObjectExceptionHandler = Smichaelsen\Airbrake\ExceptionHandler\ContentObjectExceptionHandler
 
 plugin.tx_airbrake {
     apiKey = {$plugin.tx_airbrake.apiKey}

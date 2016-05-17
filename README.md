@@ -24,5 +24,5 @@ These settings are not introduced by `EXT:airbrake` but can be useful for you:
 
 | option | description |
 | ------ | ----------- |
-| config.contentObjectExceptionHandler | This is set to `Smichaelsen\Airbrake\ProductionExceptionHandler` by `EXT:airbrake` to register it as exception handler for content objects. Unsetting it will restore TYPO3's default behaviour. |
+| config.contentObjectExceptionHandler | This is set to `Smichaelsen\Airbrake\ExceptionHandler\ContentObjectExceptionHandler` by `EXT:airbrake` to register it as exception handler for content objects. Unsetting it will restore TYPO3's default behaviour. |
 | config.contentObjectExceptionHandler.errorMessage | This is TYPO3's option to change the default message ("Oops, an error occurred! Code: SOMEEXCEPTIONIDENTIFIER"). Also note that `EXT:airbrake` changes the TYPO3 default message to a localized message if you set nothing here. |

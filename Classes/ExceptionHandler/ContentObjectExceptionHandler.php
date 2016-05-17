@@ -1,5 +1,5 @@
 <?php
-namespace Smichaelsen\Airbrake;
+namespace Smichaelsen\Airbrake\ExceptionHandler;
 
 use Airbrake\EventHandler;
 use Smichaelsen\ShortcutParams\TypoScriptFrontendController;
