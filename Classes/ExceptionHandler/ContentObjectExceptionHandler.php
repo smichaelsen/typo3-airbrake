@@ -1,11 +1,10 @@
 <?php
 namespace Smichaelsen\Airbrake\ExceptionHandler;
 
-use Airbrake\EventHandler;
-use Smichaelsen\ShortcutParams\TypoScriptFrontendController;
+use Smichaelsen\Airbrake\Service\AirbrakeService;
+use Smichaelsen\Airbrake\Service\PluginConfigurationService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\AbstractContentObject;
-use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\ContentObject\Exception\ProductionExceptionHandler;
 use TYPO3\CMS\Lang\LanguageService;
 
@@ -35,22 +34,14 @@ class ContentObjectExceptionHandler extends ProductionExceptionHandler
      */
     public function handle(\Exception $exception, AbstractContentObject $contentObject = null, $contentObjectConfiguration = array())
     {
-        $pluginConfiguration = $this->getPluginConfiguration($contentObject->getContentObject());
+        $pluginConfiguration = GeneralUtility::makeInstance(PluginConfigurationService::class)->getPluginConfiguration();
         $this->stillLogExceptionToLogfile = (bool)$pluginConfiguration['stillLogExceptionToLogfile'];
         // Change the default message if no file logging is enabled. There is no need to output an exception identifier to the user.
         if (!$this->stillLogExceptionToLogfile && !isset($this->configuration['errorMessage'])) {
             $this->configuration['errorMessage'] = $this->getLanguageService()->sL('LLL:EXT:airbrake/Resources/Private/Language/locallang.xlf:defaultErrorMessage');
         }
         $message = parent::handle($exception);
-        $exceptionHandler = EventHandler::start($pluginConfiguration['apiKey'], false,
-            [
-                'secure' => true,
-                'host' => $pluginConfiguration['host'],
-                'resource' => $pluginConfiguration['resource'],
-                'environmentName' => (string)GeneralUtility::getApplicationContext(),
-            ]
-        );
-        $exceptionHandler->onException($exception);
+        GeneralUtility::makeInstance(AirbrakeService::class)->handleException($exception);
         return $message;
     }
 
@@ -67,43 +58,11 @@ class ContentObjectExceptionHandler extends ProductionExceptionHandler
     }
 
     /**
-     * @param ContentObjectRenderer $cObj
-     * @return array
-     */
-    protected function getPluginConfiguration(ContentObjectRenderer $cObj)
-    {
-        static $pluginConfiguration;
-        if (!is_array($pluginConfiguration)) {
-            $pluginConfiguration = $this->getTyposcriptFrontendController()->tmpl->setup['plugin.']['tx_airbrake.'];
-            $stdWrapProperties = GeneralUtility::trimExplode(',', 'apiKey, host, resource, stillLogExceptionToLogfile');
-            foreach ($stdWrapProperties as $stdWrapProperty) {
-                if (empty($pluginConfiguration[$stdWrapProperty])) {
-                    $pluginConfiguration[$stdWrapProperty] = '';
-                }
-                if (empty($pluginConfiguration[$stdWrapProperty . '.'])) {
-                    $pluginConfiguration[$stdWrapProperty . '.'] = [];
-                }
-                $pluginConfiguration[$stdWrapProperty] = $cObj->stdWrap($pluginConfiguration[$stdWrapProperty], $pluginConfiguration[$stdWrapProperty . '.']);
-                unset($pluginConfiguration[$stdWrapProperty . '.']);
-            }
-        }
-        return $pluginConfiguration;
-    }
-
-    /**
      * @return LanguageService
      */
     protected function getLanguageService()
     {
         return $GLOBALS['LANG'];
-    }
-
-    /**
-     * @return TypoScriptFrontendController
-     */
-    protected function getTyposcriptFrontendController()
-    {
-        return $GLOBALS['TSFE'];
     }
 
 }
