@@ -1,8 +1,8 @@
 config.contentObjectExceptionHandler = Smichaelsen\Airbrake\ExceptionHandler\ContentObjectExceptionHandler
 
 plugin.tx_airbrake {
-  apiKey = {$plugin.tx_airbrake.apiKey}
+  projectId = {$plugin.tx_airbrake.projectId}
+  projectKey = {$plugin.tx_airbrake.projectKey}
   host = {$plugin.tx_airbrake.host}
-  resource = {$plugin.tx_airbrake.resource}
   stillLogExceptionToLogfile = {$plugin.tx_airbrake.stillLogExceptionToLogfile}
 }

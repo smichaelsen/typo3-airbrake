@@ -13,9 +13,9 @@ These options are available in `plugin.tx_airbrake`. All of them are also config
 
 | option | default | description |
 | ------ | ------- | ----------- |
-| apiKey | *(empty)* | API Key for airbrake |
+| projectId | *(empty)* | Project ID for airbrake |
+| projectKey | *(empty)* | Project Key for airbrake |
 | host | `api.airbrake.io` | URL of your airbrake host. |
-| resource | `/notifier_api/v2/notices` | Resource to call to log exceptions. This depends on the host. You probably only need to change the resouce if you use an alternative airbrake host |
 | stillLogExceptionToLogfile | `false` | TYPO3 usually logs production exceptions to typo3temp/logs/ and airbrake disables this behaviour. If this is set to true, TYPO3 will keep logging to the file. |
 
 ## Other TypoScript
