@@ -62,7 +62,7 @@ class ContentObjectExceptionHandler extends ProductionExceptionHandler
      */
     protected function getLanguageService()
     {
-        return $GLOBALS['LANG'];
+        return isset($GLOBALS['LANG']) ? $GLOBALS['LANG'] : GeneralUtility::makeInstance(LanguageService::class);
     }
 
 }
