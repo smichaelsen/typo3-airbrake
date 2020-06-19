@@ -5,7 +5,7 @@ At the moment only exceptions in ContentElement are handled. Other frontendexcep
 
 ## Quick Setup
 
-After installing the extension, include its Static TypoScript Template and then configure your airbrake.io API key in the TS Constant Editor.
+After installing the extension, include its Static TypoScript Template and then configure your airbrake.io project ID and key in the TS Constant Editor.
 
 ## TypoScript Reference
 
