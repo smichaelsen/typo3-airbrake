@@ -8,15 +8,11 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 class PluginConfigurationService implements SingletonInterface
 {
-
-    /**
-     * @return array
-     */
-    public function getPluginConfiguration()
+    public function getPluginConfiguration(): array
     {
         static $pluginConfiguration;
         if (!is_array($pluginConfiguration)) {
-            $pluginConfiguration = $this->getTyposcriptFrontendController()->tmpl->setup['plugin.']['tx_airbrake.'];
+            $pluginConfiguration = self::getTyposcriptFrontendController()->tmpl->setup['plugin.']['tx_airbrake.'];
             $stdWrapProperties = GeneralUtility::trimExplode(',', 'apiKey, host, resource, stillLogExceptionToLogfile');
             foreach ($stdWrapProperties as $stdWrapProperty) {
                 if (empty($pluginConfiguration[$stdWrapProperty])) {
@@ -32,12 +28,8 @@ class PluginConfigurationService implements SingletonInterface
         return $pluginConfiguration;
     }
 
-    /**
-     * @return TypoScriptFrontendController
-     */
-    protected function getTyposcriptFrontendController()
+    protected static function getTyposcriptFrontendController(): TypoScriptFrontendController
     {
         return $GLOBALS['TSFE'];
     }
-
 }

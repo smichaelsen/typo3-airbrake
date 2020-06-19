@@ -7,14 +7,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class GeneralExceptionHandler extends ProductionExceptionHandler
 {
-
-    /**
-     *
-     */
     public function __construct()
     {
         parent::__construct();
-        set_exception_handler(array($this, 'handleException'));
+        set_exception_handler([$this, 'handleException']);
     }
 
     /**
@@ -26,5 +22,4 @@ class GeneralExceptionHandler extends ProductionExceptionHandler
         GeneralUtility::makeInstance(AirbrakeService::class)->handleException($exception);
         parent::handleException($exception);
     }
-
 }

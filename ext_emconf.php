@@ -1,17 +1,17 @@
 <?php
 
-$EM_CONF['airbrake'] = array(
+$EM_CONF['airbrake'] = [
     'title' => 'Airbrake',
     'description' => 'Log exceptions to airbrake',
     'category' => 'services',
     'state' => 'stable',
     'author' => 'Sebastian Michaelsen',
-    'author_email' => '',
-    'author_company' => 'app-zap',
-    'version' => '1.0.0',
-    'constraints' => array(
-        'depends' => array(
-            'typo3' => '7.6.2-7.99.99',
-        ),
-    ),
-);
+    'author_email' => 'sebastian@michaelsen.io',
+    'author_company' => '',
+    'version' => '2.0.0',
+    'constraints' => [
+        'depends' => [
+            'typo3' => '8.7.0-9.5.99',
+        ],
+    ],
+];
