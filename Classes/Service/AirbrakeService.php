@@ -6,7 +6,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class AirbrakeService implements SingletonInterface
 {
-    public function handleException(\Exception $exception)
+    public function handleException(\Throwable $exception)
     {
         $pluginConfiguration = GeneralUtility::makeInstance(PluginConfigurationService::class)->getPluginConfiguration();
         $notifier = new \Airbrake\Notifier(

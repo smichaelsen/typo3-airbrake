@@ -3,9 +3,16 @@
 Logs PHP Exceptions to <a href="https://airbrake.io/">airbrake.io</a> or alternative services that are API compliant to airbrake.io.
 At the moment only exceptions in ContentElement are handled. Other frontendexceptions and all backend exceptions are not supported (handled) yet.
 
-## Quick Setup
+## Setup
 
+### Replace contentObjectExceptionHandler
 After installing the extension, include its Static TypoScript Template and then configure your airbrake.io project ID and key in the TS Constant Editor.
+
+### Replace debugExceptionHandler
+`$GLOBALS['TYPO3_CONF_VARS']['SYS']['debugExceptionHandler'] = \Smichaelsen\Airbrake\ExceptionHandler\GeneralExceptionHandler::class;`
+
+### Replace productionExceptionHandler
+`$GLOBALS['TYPO3_CONF_VARS']['SYS']['productionExceptionHandler'] = \Smichaelsen\Airbrake\ExceptionHandler\GeneralExceptionHandler::class;`
 
 ## TypoScript Reference
 
