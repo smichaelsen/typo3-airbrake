@@ -10,14 +10,13 @@ use TYPO3\CMS\Lang\LanguageService;
 
 class ContentObjectExceptionHandler extends ProductionExceptionHandler
 {
-
     /**
      * @var array
      */
     protected $pluginConfiguration;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $stillLogExceptionToLogfile;
 
@@ -32,13 +31,13 @@ class ContentObjectExceptionHandler extends ProductionExceptionHandler
      * @return string
      * @throws \Exception
      */
-    public function handle(\Exception $exception, AbstractContentObject $contentObject = null, $contentObjectConfiguration = array())
+    public function handle(\Exception $exception, AbstractContentObject $contentObject = null, $contentObjectConfiguration = []): string
     {
         $pluginConfiguration = GeneralUtility::makeInstance(PluginConfigurationService::class)->getPluginConfiguration();
         $this->stillLogExceptionToLogfile = (bool)$pluginConfiguration['stillLogExceptionToLogfile'];
         // Change the default message if no file logging is enabled. There is no need to output an exception identifier to the user.
         if (!$this->stillLogExceptionToLogfile && !isset($this->configuration['errorMessage'])) {
-            $this->configuration['errorMessage'] = $this->getLanguageService()->sL('LLL:EXT:airbrake/Resources/Private/Language/locallang.xlf:defaultErrorMessage');
+            $this->configuration['errorMessage'] = self::getLanguageService()->sL('LLL:EXT:airbrake/Resources/Private/Language/locallang.xlf:defaultErrorMessage');
         }
         $message = parent::handle($exception);
         GeneralUtility::makeInstance(AirbrakeService::class)->handleException($exception);
@@ -57,12 +56,8 @@ class ContentObjectExceptionHandler extends ProductionExceptionHandler
         }
     }
 
-    /**
-     * @return LanguageService
-     */
-    protected function getLanguageService()
+    protected static function getLanguageService(): LanguageService
     {
         return isset($GLOBALS['LANG']) ? $GLOBALS['LANG'] : GeneralUtility::makeInstance(LanguageService::class);
     }
-
 }

@@ -1,12 +1,13 @@
 {
-    "name": "smichaelsen/airbrake",
-    "type": "typo3-cms-extension",
-    "autoload": {
-        "psr-4": {
-            "Smichaelsen\\Airbrake\\": "Classes/"
-        }
-    },
-    "require": {
-        "dbtlr/php-airbrake": "*"
+  "name": "smichaelsen/airbrake",
+  "type": "typo3-cms-extension",
+  "autoload": {
+    "psr-4": {
+      "Smichaelsen\\Airbrake\\": "Classes/"
     }
+  },
+  "require": {
+    "dbtlr/php-airbrake": "*",
+    "typo3/cms-core": "^8.7 || ^9.5"
+  }
 }
